@@ -84,7 +84,78 @@
 
         private static int Chack(List<int[]> coupon)
         {
-           throw new NotImplementedException();
+            int win = 0;
+            int[] drawn = new int[6];
+            for (int i = 0; i < drawn.Length; i++)
+            {
+                int draw = rnd.Next(1, 50);
+                // check if the number is repeated
+                if (!drawn.Contains(draw))
+                {
+                    drawn[i] = draw;
+                }
+                else
+                {
+                    i--;
+                }
+            }
+            Array.Sort(drawn);
+            Console.WriteLine("Wylosowane liczby");
+            foreach (int number in drawn)
+            {
+                Console.Write(number + ", ");
+            }
+            int[] hit = CheckCoupon(coupon, drawn);
+            return win;
+        }
+
+        private static int[] CheckCoupon(List<int[]> coupon, int[] drawn)
+        {
+            int[] win = new int[4];
+            int i = 0;
+
+            Console.WriteLine("\nTwój kupon");
+
+            foreach (int[] los in coupon)
+            {
+                i++;
+                Console.WriteLine(i + ": ");
+                int hit = 0;
+                foreach (int number in los)
+                {
+                    if(drawn.Contains(number))
+                    {
+                        Console.ForegroundColor= ConsoleColor.Green;
+                        Console.WriteLine(number + ", ");
+                        Console.Clear();
+                        hit++;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(number + ", ");
+                        Console.ResetColor();
+                    }
+                }
+                switch (hit)
+                {
+                    case 3:
+                        win[0]++;
+                        break;
+                    case 4:
+                        win[1]++;
+                        break;
+                    case 5:
+                        win[2]++;
+                        break;
+                    case 6:
+                        win[3]++;
+                        break;
+                }
+                Console.WriteLine(" - Trafiono {0}/6",hit);
+            }
+
+            return win;
         }
 
         private static int[] BetFate()

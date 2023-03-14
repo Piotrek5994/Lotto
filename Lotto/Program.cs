@@ -50,19 +50,19 @@
                         }
                     } while (choice == ConsoleKey.D1);
                     Console.Clear();
-                    if(coupon.Count > 0)
+                    if (coupon.Count > 0)
                     {
                         int win = Chack(coupon);
-                        if(win > 0)
+                        if (win > 0)
                         {
-                            Console.ForegroundColor= ConsoleColor.Green;
-                            Console.WriteLine("Wygrałes {0} zł w tym losowaniu",win);
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Wygrałes {0} zł w tym losowaniu", win);
                             Console.ResetColor();
                             money += win;
                         }
                         else
                         {
-                            Console.ForegroundColor= ConsoleColor.Red;
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Niestety nic nie wygrałeś spróbuj jeszcze raz !! ");
                             Console.ResetColor();
                         }
@@ -89,12 +89,41 @@
 
         private static int[] BetFate()
         {
-            throw new NotImplementedException();
+            int[] numbers = new int[6];
+            int number = -1;
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                number = -1;
+                Console.Clear();
+                Console.Write("Podstawione liczby");
+                foreach (int l in numbers)
+                {
+                    if (l > 0)
+                    {
+                        Console.Write(l + ", ");
+                    }
+                }
+                Console.WriteLine("\n\nWybierz liczbe od 1 do 49");
+                Console.Write("{0}/6 : ", i + 1);
+                bool real = int.TryParse(Console.ReadLine(), out number);
+                if (real && number > 0 && number <= 49 && !numbers.Contains(number))
+                {
+                    numbers[i] = number;
+                }
+                else
+                {
+                    Console.WriteLine("Już masz tą liczbe");
+                    i--;
+                    Console.ReadKey();
+                }
+            }
+            Array.Sort(numbers);
+            return numbers;
         }
 
         private static void SeeCoupon(List<int[]> coupon)
         {
-            if(coupon.Count == 0)
+            if (coupon.Count == 0)
             {
                 Console.WriteLine("Nic nie postawiłes");
             }
@@ -105,8 +134,8 @@
                 foreach (int[] los in coupon)
                 {
                     i++;
-                    Console.WriteLine(i+": ");
-                    foreach(int number in los)
+                    Console.WriteLine(i + ": ");
+                    foreach (int number in los)
                     {
                         Console.Write(number + ", ");
                     }

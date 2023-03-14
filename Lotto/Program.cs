@@ -84,7 +84,7 @@
 
         private static int Chack(List<int[]> coupon)
         {
-            throw new NotImplementedException();
+           throw new NotImplementedException();
         }
 
         private static int[] BetFate()

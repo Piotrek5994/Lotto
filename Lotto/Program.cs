@@ -62,6 +62,7 @@
                         }
                         else
                         {
+                            Console.WriteLine(draw);
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Niestety nic nie wygrałeś spróbuj jeszcze raz !! ");
                             Console.ResetColor();
@@ -106,6 +107,38 @@
                 Console.Write(number + ", ");
             }
             int[] hit = CheckCoupon(coupon, drawn);
+            int value = 0;
+
+            Console.WriteLine();
+
+            if (hit[0] > 0)
+            {
+                if (hit[0] > 0)
+                {
+                    value = hit[0] * 24;
+                    Console.WriteLine("3 Trafione wygrałes : {0}zł", value);
+                    win += value;
+                }
+                if (hit[1] > 0)
+                {
+
+
+                    value = hit[1] * rnd.Next(100, 301);
+                    Console.WriteLine("4 Trafione wygrałes : {0}zł", value);
+                    win += value;
+                }
+                if (hit[2] > 0)
+                {
+                    value = hit[2] * rnd.Next(4000, 8001);
+                    Console.WriteLine("5 Trafione wygrałes : {0}zł", value);
+                    win += value;
+                }
+                if (hit[3] > 0)
+                {
+                    value = (hit[3] * cumulaton) / hit[3] + rnd.Next(0, 5);
+                    Console.WriteLine("6 Trafione wygrałes : {0}zł", value);
+                }
+            }
             return win;
         }
 
@@ -118,23 +151,26 @@
 
             foreach (int[] los in coupon)
             {
+                Console.WriteLine("Wylosowane liczby");
+                foreach (int number in drawn)
+                {
+                    Console.Write(number + ", ");
+                }
                 i++;
                 Console.WriteLine(i + ": ");
                 int hit = 0;
                 foreach (int number in los)
                 {
-                    if(drawn.Contains(number))
+                    if (drawn.Contains(number))
                     {
-                        Console.ForegroundColor= ConsoleColor.Green;
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine(number + ", ");
                         Console.Clear();
                         hit++;
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(number + ", ");
-                        Console.ResetColor();
                     }
                 }
                 switch (hit)
@@ -152,7 +188,7 @@
                         win[3]++;
                         break;
                 }
-                Console.WriteLine(" - Trafiono {0}/6",hit);
+                Console.WriteLine(" - Trafiono {0}/6", hit);
             }
 
             return win;
@@ -205,7 +241,7 @@
                 foreach (int[] los in coupon)
                 {
                     i++;
-                    Console.WriteLine(i + ": ");
+                    Console.Write(i + ": ");
                     foreach (int number in los)
                     {
                         Console.Write(number + ", ");

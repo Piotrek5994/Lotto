@@ -94,7 +94,26 @@
 
         private static void SeeCoupon(List<int[]> coupon)
         {
-            throw new NotImplementedException();
+            if(coupon.Count == 0)
+            {
+                Console.WriteLine("Nic nie postawiłes");
+            }
+            else
+            {
+                int i = 0;
+                Console.WriteLine("\nTwój kupon");
+                foreach (int[] los in coupon)
+                {
+                    i++;
+                    Console.WriteLine(i+": ");
+                    foreach(int number in los)
+                    {
+                        Console.Write(number + ", ");
+                    }
+                    Console.WriteLine();
+
+                }
+            }
         }
     }
 }
